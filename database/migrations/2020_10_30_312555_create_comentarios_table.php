@@ -16,9 +16,18 @@ class CreateComentariosTable extends Migration
         Schema::create('comentarios', function (Blueprint $table) {
             $table->id();
             $table->string("titulo",100);
-            $table->text("contenido");
-            $table->unsignedBigInteger("persona_id");
-            $table->foreign("persona_id")->references("id")->on("personas");
+            $table->string("contenido");
+
+            $table->foreignId('persona_id')->constrained('personas')->onDelete('cascade');
+            $table->foreignId('producto_id')->constrained('productos')->onDelete('cascade');
+
+
+            //$table->unsignedBigInteger('persona_id');
+            //$table->foreign('persona_id')->references('id')->on('personas');
+
+            //$table->unsignedBigInteger('producto_id');
+            //$table->foreign('producto_id')->references('id')->on('productos');
+
             $table->timestamps();
         });
     }

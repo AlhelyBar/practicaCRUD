@@ -6,6 +6,7 @@ use App\Http\Controllers\Controller;
 use Illuminate\Http\Request;
 use App\Modelos\Persona;
 
+
 class PersonaController extends Controller
 {
     public function index($id=null){
@@ -16,6 +17,26 @@ class PersonaController extends Controller
 
     public function guardar(Request $request){
         $persona = new Persona();
+        $persona->nombre=$request->nombre;
+        $persona->apellido_p=$request->apellido_p;
+        $persona->apellido_m=$request->apellido_m;
+
+        if($persona -> save())
+            return response()->json(["persona"=>$persona],201);
+
+        return response()->json(null,400);
+    }
+
+    public function borrar( $id){
+        $persona=Persona::find($id);
+        $persona->delete();
+        
+        return response()->json(null, 204);
+
+    }
+
+    public function actualizar(Request $request, $id){
+        $persona=Persona::find($id);
         $persona->nombre=$request->nombre;
         $persona->apellido_p=$request->apellido_p;
         $persona->apellido_m=$request->apellido_m;
