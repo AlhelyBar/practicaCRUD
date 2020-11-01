@@ -3,6 +3,10 @@
 namespace App\Modelos;
 
 use Illuminate\Database\Eloquent\Model;
+use Laravel\Sanctum\HasApiTokens;
+use Illuminate\Contracts\Auth\MustVerifyEmail;
+use Illuminate\Foundation\Auth\User as Authenticatable;
+use Illuminate\Notifications\Notifiable;
 
 class Persona extends Model
 {
@@ -15,5 +19,5 @@ class Persona extends Model
         return $this -> hasMany('App\Modelos\Comentario','persona_id','id');
     }
     
-    
+    use HasApiTokens;
 }

@@ -18,11 +18,13 @@ Route::middleware('auth:api')->get('/user', function (Request $request) {
     return $request->user();
 });
 
+
 //Personas
-Route::get("personas/{id?}","API\PersonaController@index")->where("id","[0-9]+");
-Route::post("personas","API\PersonaController@guardar");
-Route::delete("personas/{id}","API\PersonaController@borrar")->where("id","[0-9]+");
-Route::put("personas/{id}", "API\PersonaController@actualizar")->where("id","[0-9]+");
+Route::post("/logIn","API\PersonaController@logIn");
+Route::get("user/{id?}","API\PersonaController@index")->where("id","[0-9]+");
+Route::post("/guardar","API\PersonaController@guardar");
+Route::delete("user/{id}","API\PersonaController@borrar")->where("id","[0-9]+");
+Route::put("user/{id}", "API\PersonaController@actualizar")->where("id","[0-9]+");
 
 //Comentarios
 Route::get("comentarios/{id?}","API\ComentariosController@index")->where("id","[0-9]+");
@@ -37,4 +39,4 @@ Route::delete("productos/{id}","API\ProductosController@borrar")->middleware('ve
 Route::put("productos/{id}", "API\ProductosController@actualizar")->where("id","[0-9]+");
 
 //Consultas
-Route::get("consulta/{id?}","API\ConsultaController@index")->where("id","[0-9]+");
+Route::get("consulta/{id?}","API\ConsultaController@comentario_per")->where("id","[0-9]+");

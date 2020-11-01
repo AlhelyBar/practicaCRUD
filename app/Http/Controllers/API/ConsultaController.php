@@ -10,7 +10,18 @@ use DB;
 
 class ConsultaController extends Controller
 {
-    public function index($id=null){
+   
+    public function comentario_per($id){
+        $comment = Comentarios::where('persona_id', $id)->get();
+        return response()->json($comment);  
+}
+
+
+}
+         
+    
+    /*
+     public function index($id=null){
         if($id)
             $consulta = DB::table('personas')
                 ->join('comentarios','personas.id','=','comentarios.persona_id')
@@ -18,15 +29,6 @@ class ConsultaController extends Controller
                 ->select('personas.nombre','productos.nombreProducto','comentarios.contenido')
                 ->get($consulta);
     }
-}
-
-
-
-            //return response()->json(["producto"=>Producto::find($id)],200);
-            
-        //return response()->json(["productos"=>Producto::all()],200);
-    
-    /*
     $beneficiarios = DB::table('departamento')
                 ->join('municipio', function($join) {
                     $join->on('departamento.id', '=', 'municipio.departamento_id')
