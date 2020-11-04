@@ -18,12 +18,14 @@ Route::middleware('auth:api')->get('/user', function (Request $request) {
     return $request->user();
 });
 
-
 //Personas
+Route::middleware('auth:sanctum')->get('/user',"API\PersonaController@index");
+Route::post("/logAdmin","API\PersonaController@logAdmin");
 Route::post("/logIn","API\PersonaController@logIn");
-Route::get("user/{id?}","API\PersonaController@index")->where("id","[0-9]+");
 Route::post("/guardar","API\PersonaController@guardar");
-Route::delete("user/{id}","API\PersonaController@borrar")->where("id","[0-9]+");
+
+Route::middleware('auth:sanctum')->delete("/borrar","API\PersonaController@borrar");
+
 Route::put("user/{id}", "API\PersonaController@actualizar")->where("id","[0-9]+");
 
 //Comentarios
